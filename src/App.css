@@ -7,17 +7,25 @@ header {
   padding: 30px 0;
   text-align: center;
   font-size: 22px;
-  background-color: #333;
+  background-color: #343B49;
   color: #fff;
   font-weight: bold;
 }
 
+.main-menu {
+  font-size: 14px;
+  margin: 10px 0 0 0;
+  font-weight: normal;
+}
+
 .article {
   position: relative;
-  background-color: #ccc;
+  background-color: #3173A8;
   padding: 20px;
-  margin: 10px auto;
+  margin: 0 auto;
+  box-shadow: 0px 0px 18px -5px #343B49;
   max-width: 90%;
+  color: #fff;
 }
 
 .title {
@@ -27,12 +35,13 @@ header {
 
 .date {
   font-size: 10px;
-  color: #333;
-  float: right;
+  color: #fff;
+  margin: 10px 0;
+  text-align: right;
+  font-style: italic;
 }
 
 .content {
   font-size: 12px;
-  margin-top: 20px;
   max-width: 1000px;
 }
