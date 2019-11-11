@@ -1,1 +1,2 @@
 [0828/233237.818:ERROR:settings.cc(266)] Settings version is not 1
+[0913/211638.713:ERROR:persistent_memory_allocator.cc(777)] Corruption detected in shared-memory segment.

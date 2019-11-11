@@ -18,6 +18,10 @@ header {
   font-weight: normal;
 }
 
+.main-menu a {
+  padding: 0 15px;
+}
+
 .article {
   position: relative;
   background-color: #3173A8;

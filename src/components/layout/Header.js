@@ -8,7 +8,9 @@ class Header extends Component {
             <header>
                 Актуална Пътна Обстановка
                 <div className="main-menu">
-                    <a style={linkStyle} href="/#" onClick={this.props.refreshData}>Refresh</a>
+                    <Link style={linkStyle} to={`/`}>Новини</Link>
+                    <a style={linkStyle} href="/#" onClick={this.props.refreshData}>Обнови</a>
+                    <Link style={linkStyle} to={`/fuels`}>Цени на горивата</Link>
                 </div>
             </header>
         );
