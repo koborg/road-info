@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './components/layout/Header';
 import LinearProgress from './components/utils/LoadingBar';
 import News from './components/News';
 import About from './components/About';
@@ -8,7 +7,8 @@ import Fuels from './components/Fuels';
 import axios from 'axios';
 import uniqueid from 'uniqid';
 import './App.css';
-
+import MenuAppBar from './components/layout/MenuAppBar';
+import StickyBottomNav from './components/layout/StickyBottomNav';
 
 class App extends Component {
 
@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Header refreshData={this.refreshData} />
+          <MenuAppBar refreshData={this.refreshData}/>
           {
             this.state.loading ? <LinearProgress loading={this.state.loading} /> :
               <Route exact path="/" render={props => (
@@ -60,7 +60,9 @@ class App extends Component {
 
           <Route path="/about" component={About} />
           <Route path="/fuels" component={Fuels} />
+          
         </div>
+        <StickyBottomNav />
       </Router>
     );
   };

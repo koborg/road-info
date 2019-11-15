@@ -1,51 +1,74 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+	Container,
+	List,
+	ListItem,
+	ListItemText,
+	ListItemAvatar,
+	Avatar,
+	Typography
+} from "@material-ui/core/";
+import LocalGasStationIcon from "@material-ui/icons/LocalGasStation";
 
+const useStyles = makeStyles(theme => ({
+	root: {
+		width: "100%",
+		maxWidth: 360,
+		backgroundColor: theme.palette.background.paper
+	}
+}));
 
-class Fuels extends Component {
+export default function Fuels() {
+	const classes = useStyles();
+	const [fuel, setFuels] = useState({});
 
-    constructor(props) {
-        super(props);
+	useEffect(() => {
+		const api =
+			"https://stamenov.s3-eu-west-1.amazonaws.com/fuelsInfo.json";
+		function getFuels() {
+			return fetch(api)
+				.then(res => res.json())
+				.then(fuel => setFuels(fuel))
+				.catch(error => console.error(error));
+		}
 
-        this.state = {
-            fuel: {}
-        }
-    }
+		getFuels();
 
-    render() {
-        const { fuel } = this.state;
-        const fuelKeys = Object.keys(fuel);
-        let dateStamp = '';
+		return function cleanup() {
+			//setFuels({});
+		};
+	}, []);
 
-        let fuelList = fuelKeys.map((f, i) => (
-            <div id={'fuel_' + i} key={JSON.parse(fuel[f]).fuel} className="fuel-item">{JSON.parse(fuel[f]).fuel} : {JSON.parse(fuel[f]).price}{JSON.parse(fuel[f]).dimension}</div>
-        ));
+	const fuelKeys = Object.keys(fuel);
+	let dateStamp = "";
 
-        if(fuel[0]) {
-            dateStamp = JSON.parse(fuel[0]).date
-        }
-        
+	let fuelList = fuelKeys.map((f, i) => (
+		<ListItem key={JSON.parse(fuel[f]).fuel}>
+			<ListItemAvatar>
+				<Avatar>
+					<LocalGasStationIcon />
+				</Avatar>
+			</ListItemAvatar>
+			<ListItemText
+				primary={JSON.parse(fuel[f]).fuel}
+				secondary={
+					JSON.parse(fuel[f]).price + JSON.parse(fuel[f]).dimension
+				}
+			/>
+		</ListItem>
+	));
 
-        return (
-            <div className="wrapper">
-                
-                <h3>Date: {dateStamp}</h3>
-                {fuelList}
-            </div>
-        )
-    }
+	if (fuel[0]) {
+		dateStamp = JSON.parse(fuel[0]).date;
+	}
 
-    componentDidMount() {
-        const api = 'https://stamenov.s3-eu-west-1.amazonaws.com/fuelsInfo.json';
-
-        const getFuels = () => {
-            return fetch(api)
-                .then(res => res.json())
-                .then(fuel => this.setState({ fuel: fuel }))
-                .catch(error => console.error(error))
-        };
-
-        getFuels();
-    }
+	return (
+		<>
+			<Container>
+				<Typography variant="h5">Дата: {dateStamp}</Typography>
+			</Container>
+			<List className={classes.root}>{fuelList}</List>
+		</>
+	);
 }
-
-export default Fuels
