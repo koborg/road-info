@@ -5,14 +5,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import CachedIcon from '@material-ui/icons/Cached';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    
+
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -22,23 +20,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { refreshData } = props;
 
   return (
     <div className={classes.root}>
-     
+
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -50,33 +38,15 @@ export default function MenuAppBar() {
           {(
             <div>
               <IconButton
-                aria-label="account of current user"
+                aria-label="Update Road Info"
                 aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
+                aria-haspopup="false"
+                onClick={refreshData}
                 color="inherit"
               >
-                <AccountCircle />
+                <CachedIcon />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
+              
             </div>
           )}
         </Toolbar>
