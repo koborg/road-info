@@ -1,16 +1,16 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import '../../i18n';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import CachedIcon from '@material-ui/icons/Cached';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -23,20 +23,18 @@ const useStyles = makeStyles(theme => ({
 export default function MenuAppBar(props) {
   const classes = useStyles();
   const { refreshData } = props;
+  const { t } = useTranslation();
 
   return (
     <div className={classes.root}>
 
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+          
           <Typography variant="h6" className={classes.title}>
-            Пътна Обстановка
+            {props.location.pathname === '/' ? t('RoadInfo') : t('FuelPrices')}
           </Typography>
-          {(
-            <div>
+          {props.location.pathname === '/' ? 
               <IconButton
                 aria-label="Update Road Info"
                 aria-controls="menu-appbar"
@@ -45,10 +43,9 @@ export default function MenuAppBar(props) {
                 color="inherit"
               >
                 <CachedIcon />
-              </IconButton>
+              </IconButton> : ''
               
-            </div>
-          )}
+           }
         </Toolbar>
       </AppBar>
     </div>

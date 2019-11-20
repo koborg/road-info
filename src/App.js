@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import LinearProgress from './components/utils/LoadingBar';
 import News from './components/News';
 import About from './components/About';
@@ -10,6 +10,8 @@ import './App.css';
 import MenuAppBar from './components/layout/MenuAppBar';
 import StickyBottomNav from './components/layout/StickyBottomNav';
 
+const MenuAppBarWithLink = withRouter(props => <MenuAppBar {... props} />);
+
 class App extends Component {
 
   constructor(props) {
@@ -18,7 +20,8 @@ class App extends Component {
 
     this.state = {
       news: [],
-      loading: false
+      loading: false,
+      path: ''
     };
 
   }
@@ -48,7 +51,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <MenuAppBar refreshData={this.refreshData}/>
+          <MenuAppBarWithLink refreshData={this.refreshData}/>
           {
             this.state.loading ? <LinearProgress loading={this.state.loading} /> :
               <Route exact path="/" render={props => (

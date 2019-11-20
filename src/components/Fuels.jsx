@@ -10,6 +10,8 @@ import {
 	Typography
 } from "@material-ui/core/";
 import LocalGasStationIcon from "@material-ui/icons/LocalGasStation";
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -21,7 +23,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function Fuels() {
 	const classes = useStyles();
-	const [fuel, setFuels] = useState({});
+    const [fuel, setFuels] = useState({});
+    const { t } = useTranslation();
 
 	useEffect(() => {
 		const api =
@@ -51,7 +54,7 @@ export default function Fuels() {
 				</Avatar>
 			</ListItemAvatar>
 			<ListItemText
-				primary={JSON.parse(fuel[f]).fuel}
+				primary={t(JSON.parse(fuel[f]).fuel)}
 				secondary={
 					JSON.parse(fuel[f]).price + JSON.parse(fuel[f]).dimension
 				}

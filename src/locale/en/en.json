@@ -1,0 +1,10 @@
+{
+    "translation": {
+        "RoadInfo": "Пътна Обстановка",
+        "FuelPrices": "Цени на горивата",
+        "gasoline": "Бензин",
+        "diesel": "Дизел",
+        "lpg": "Газ",
+        "methane": "Метан"
+    }
+}
